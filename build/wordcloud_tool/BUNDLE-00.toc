@@ -1,3 +1,0 @@
-([('wordcloud_tool',
-   '/Users/yuwen/WordCloudTool/dist/wordcloud_tool',
-   'EXECUTABLE')],)
