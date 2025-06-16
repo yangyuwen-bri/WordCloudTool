@@ -24,10 +24,6 @@ args = [
     '--distpath=dist',  # Output directory
     '--workpath=build',  # Work directory
     # 添加所有必要的隐藏导入
-    '--hidden-import=openpyxl',
-    '--hidden-import=openpyxl.workbook',
-    '--hidden-import=openpyxl.worksheet',
-    '--hidden-import=openpyxl.cell',
     '--hidden-import=pandas',
     '--hidden-import=jieba',
     '--hidden-import=wordcloud',

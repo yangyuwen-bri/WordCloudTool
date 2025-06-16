@@ -74,7 +74,7 @@ def generate_files(progress_var, progress_label, popup):
         
         file_path = os.path.join(input_path, xlsx_file)
         try:
-            df = pd.read_excel(file_path, engine='openpyxl')
+            df = pd.read_excel(file_path)
             text = ' '.join(df['content'].astype(str).values)
             words = [word for word in jieba.cut(text) if word.strip() and word not in stopwords]
             filtered_text = ' '.join(words)

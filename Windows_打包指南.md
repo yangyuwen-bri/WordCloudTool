@@ -111,20 +111,21 @@ python -m pip install -r requirements.txt --force-reinstall
 ### 问题2.5：运行时出现"Missing optional dependency 'openpyxl'"错误
 **症状**：EXE打包成功，但运行时报错缺少 openpyxl 依赖
 
-**原因**：PyInstaller没有正确检测到Excel文件读取所需的依赖
+**原因**：pandas 2.0+ 与 PyInstaller 的兼容性问题，强制指定引擎导致依赖检测失败
 
 **解决方案**：
-1. **已修复**：最新的 `build_windows.py` 脚本已包含所有必要的隐藏导入
-2. **如果仍有问题**：重新运行打包脚本
+1. **已修复**：最新版本移除了强制的 `engine='openpyxl'` 参数
+2. **现在使用**：让 pandas 自动选择最适合的 Excel 引擎
+3. **重新打包**：运行更新后的打包脚本
    ```cmd
    python build_windows.py
    ```
-3. **手动验证**：打包前确保依赖完整安装
+4. **验证修复**：测试 Excel 文件读取功能
    ```cmd
-   python -c "import openpyxl; print('openpyxl OK')"
-   python -c "import pandas; print('pandas OK')"
-   python -c "import jieba; print('jieba OK')"
+   python -c "import pandas; df=pandas.read_excel('test.xlsx'); print('Excel读取正常')"
    ```
+
+**技术说明**：pandas 会自动检测并使用可用的 Excel 引擎（openpyxl、xlrd、pyxlsb等），无需强制指定。
 
 ### 问题3：生成的EXE无法运行
 - 检查是否被安全软件拦截
