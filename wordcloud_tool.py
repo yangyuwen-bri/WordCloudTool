@@ -66,7 +66,7 @@ def create_wordcloud(input_path, output_path, stopwords_path=None):
 
             # 生成词云
             wc = WordCloud(
-                font_path='simhei.ttf' if os.name == 'nt' else '/System/Library/Fonts/PingFang.ttc',
+                font_path='SimHei.ttf',
                 width=800,
                 height=400,
                 background_color='white',
