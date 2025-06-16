@@ -1,47 +1,47 @@
 @echo off
 chcp 65001 >nul
 echo ==========================================
-echo        词云生成工具 - Windows打包助手
+echo        WordCloud Tool - Windows Setup
 echo ==========================================
 echo.
 
-echo 正在检查Python环境...
+echo Checking Python environment...
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo ❌ 错误：未找到Python环境！
-    echo 请先安装Python 3.7以上版本，并确保已添加到系统PATH
-    echo 下载地址：https://www.python.org/downloads/
+    echo ERROR: Python not found!
+    echo Please install Python 3.7+ and add to PATH
+    echo Download: https://www.python.org/downloads/
     pause
     exit /b 1
 )
 
-echo ✅ Python环境检查通过
+echo Python environment OK
 echo.
 
-echo 正在安装/升级pip...
+echo Installing/upgrading pip...
 python -m pip install --upgrade pip
 
 echo.
-echo 正在安装项目依赖...
+echo Installing project dependencies...
 python -m pip install -r requirements.txt
 
 echo.
-echo 正在安装PyInstaller...
+echo Installing PyInstaller...
 python -m pip install pyinstaller
 
 echo.
-echo 开始执行打包...
+echo Starting build process...
 python build_windows.py
 
 echo.
 echo ==========================================
-if exist "dist\词云生成工具.exe" (
-    echo ✅ 打包成功完成！
-    echo 📁 可执行文件已生成：dist\词云生成工具.exe
+if exist "dist\wordcloud_tool.exe" (
+    echo SUCCESS: Build completed!
+    echo Executable file: dist\wordcloud_tool.exe
     echo.
-    echo 你可以将此exe文件发送给其他Windows用户使用
+    echo You can distribute this exe file to other Windows users
 ) else (
-    echo ❌ 打包可能失败，请检查上方错误信息
+    echo BUILD FAILED: Please check error messages above
 )
 echo ==========================================
 echo.

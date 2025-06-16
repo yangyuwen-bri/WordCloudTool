@@ -2,48 +2,48 @@ import PyInstaller.__main__
 import os
 import platform
 
-print("开始Windows版本打包...")
+print("Starting Windows build process...")
 
-# 确保字体文件存在
+# Check if font file exists
 if not os.path.exists('SimHei.ttf'):
-    raise FileNotFoundError("请确保 SimHei.ttf 字体文件在当前目录下")
+    raise FileNotFoundError("Please ensure SimHei.ttf font file is in current directory")
 
-# 确保图标文件存在
+# Check if icon file exists
 if not os.path.exists('guardian_final.ico'):
-    print("警告：未找到 guardian_final.ico 文件，将不使用图标")
+    print("Warning: guardian_final.ico not found, building without icon")
 
-# Windows打包参数
+# Windows build parameters
 args = [
-    'wordcloud_tool.py',  # 主程序文件
-    '--name=词云生成工具',  # 生成的exe名称
-    '--windowed',  # 使用窗口模式（不显示控制台）
-    '--onefile',  # 打包成单个exe文件
-    '--add-data=SimHei.ttf;.',  # 添加字体文件（Windows使用分号）
-    '--clean',  # 清理临时文件
-    '--noconfirm',  # 不确认覆盖
-    '--distpath=dist',  # 指定输出目录
-    '--workpath=build',  # 指定工作目录
+    'wordcloud_tool.py',  # Main program file
+    '--name=wordcloud_tool',  # Generated exe name (use English to avoid encoding issues)
+    '--windowed',  # Window mode (no console)
+    '--onefile',  # Package to single exe file
+    '--add-data=SimHei.ttf;.',  # Add font file (Windows uses semicolon)
+    '--clean',  # Clean temporary files
+    '--noconfirm',  # No confirmation for overwrite
+    '--distpath=dist',  # Output directory
+    '--workpath=build',  # Work directory
 ]
 
-# 如果图标文件存在，添加图标参数
+# Add icon if available
 if os.path.exists('guardian_final.ico'):
     args.append('--icon=guardian_final.ico')
 
-# 如果停用词文件存在，添加到数据文件
+# Add stopwords file if available
 if os.path.exists('stopwords.txt'):
     args.append('--add-data=stopwords.txt;.')
 
-print("打包参数:", args)
+print("Build parameters:", args)
 
-# 执行打包
+# Execute build
 try:
     PyInstaller.__main__.run(args)
-    print("\n✅ 打包完成！")
-    print("📁 可执行文件位置: dist/词云生成工具.exe")
-    print("\n使用说明:")
-    print("1. 将 dist/词云生成工具.exe 文件发送给用户")
-    print("2. 用户双击即可运行，无需安装Python环境")
-    print("3. 第一次运行可能会被Windows安全软件拦截，选择允许运行即可")
+    print("\n✅ Build completed successfully!")
+    print("📁 Executable location: dist/wordcloud_tool.exe")
+    print("\nUsage instructions:")
+    print("1. Send dist/wordcloud_tool.exe to users")
+    print("2. Users can double-click to run, no Python installation needed")
+    print("3. First run may be blocked by Windows security, choose 'Run anyway'")
 except Exception as e:
-    print(f"❌ 打包失败: {e}")
-    print("请检查所有依赖是否正确安装") 
+    print(f"❌ Build failed: {e}")
+    print("Please check if all dependencies are correctly installed") 
