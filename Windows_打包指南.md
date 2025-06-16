@@ -108,6 +108,24 @@ python -m pip install pyinstaller
 python -m pip install -r requirements.txt --force-reinstall
 ```
 
+### 问题2.5：运行时出现"Missing optional dependency 'openpyxl'"错误
+**症状**：EXE打包成功，但运行时报错缺少 openpyxl 依赖
+
+**原因**：PyInstaller没有正确检测到Excel文件读取所需的依赖
+
+**解决方案**：
+1. **已修复**：最新的 `build_windows.py` 脚本已包含所有必要的隐藏导入
+2. **如果仍有问题**：重新运行打包脚本
+   ```cmd
+   python build_windows.py
+   ```
+3. **手动验证**：打包前确保依赖完整安装
+   ```cmd
+   python -c "import openpyxl; print('openpyxl OK')"
+   python -c "import pandas; print('pandas OK')"
+   python -c "import jieba; print('jieba OK')"
+   ```
+
 ### 问题3：生成的EXE无法运行
 - 检查是否被安全软件拦截
 - 尝试以管理员身份运行

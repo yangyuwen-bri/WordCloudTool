@@ -23,6 +23,26 @@ args = [
     '--noconfirm',  # No confirmation for overwrite
     '--distpath=dist',  # Output directory
     '--workpath=build',  # Work directory
+    # 添加所有必要的隐藏导入
+    '--hidden-import=openpyxl',
+    '--hidden-import=openpyxl.workbook',
+    '--hidden-import=openpyxl.worksheet',
+    '--hidden-import=openpyxl.cell',
+    '--hidden-import=pandas',
+    '--hidden-import=jieba',
+    '--hidden-import=wordcloud',
+    '--hidden-import=matplotlib',
+    '--hidden-import=matplotlib.pyplot',
+    '--hidden-import=matplotlib.backends.backend_tkagg',
+    '--hidden-import=PIL',
+    '--hidden-import=PIL._tkinter_finder',
+    '--hidden-import=tkinter',
+    '--hidden-import=tkinter.ttk',
+    '--hidden-import=tkinter.filedialog',
+    '--hidden-import=tkinter.messagebox',
+    # 添加数据收集器选项
+    '--collect-data=jieba',
+    '--collect-data=wordcloud',
 ]
 
 # Add icon if available
@@ -44,6 +64,7 @@ try:
     print("1. Send dist/wordcloud_tool.exe to users")
     print("2. Users can double-click to run, no Python installation needed")
     print("3. First run may be blocked by Windows security, choose 'Run anyway'")
+    print("4. Make sure target system has Visual C++ Redistributable installed")
 except Exception as e:
     print(f"❌ Build failed: {e}")
     print("Please check if all dependencies are correctly installed") 
