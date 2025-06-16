@@ -1,7 +1,35 @@
 @echo off
+cd /d "%~dp0"
 echo ==========================================
 echo    WordCloud Tool - Windows Setup
 echo ==========================================
+echo Current directory: %CD%
+echo.
+
+echo Checking required files...
+if not exist "wordcloud_tool.py" (
+    echo ERROR: wordcloud_tool.py not found!
+    echo Please run this script in the project directory
+    echo Make sure all project files are in the same folder
+    pause
+    exit /b 1
+)
+
+if not exist "requirements.txt" (
+    echo ERROR: requirements.txt not found!
+    echo Please run this script in the project directory
+    pause
+    exit /b 1
+)
+
+if not exist "build_windows.py" (
+    echo ERROR: build_windows.py not found!
+    echo Please run this script in the project directory
+    pause
+    exit /b 1
+)
+
+echo All required files found!
 echo.
 
 echo Checking Python...
@@ -35,9 +63,12 @@ echo.
 echo ==========================================
 if exist "dist\wordcloud_tool.exe" (
     echo SUCCESS!
-    echo File: dist\wordcloud_tool.exe
+    echo File: %CD%\dist\wordcloud_tool.exe
+    echo.
+    echo You can now distribute this exe file!
 ) else (
     echo BUILD FAILED!
+    echo Please check the error messages above
 )
 echo ==========================================
 pause 
