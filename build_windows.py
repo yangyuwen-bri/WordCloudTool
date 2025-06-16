@@ -36,9 +36,14 @@ args = [
     '--hidden-import=tkinter.ttk',
     '--hidden-import=tkinter.filedialog',
     '--hidden-import=tkinter.messagebox',
+    '--hidden-import=openpyxl',
+    '--hidden-import=openpyxl.reader.excel',
+    '--hidden-import=openpyxl.workbook',
+    '--hidden-import=openpyxl.writer.excel',
     # 添加数据收集器选项
     '--collect-data=jieba',
     '--collect-data=wordcloud',
+    '--collect-all=openpyxl',  # 更强大的选项，包含所有openpyxl相关模块和数据
 ]
 
 # Add icon if available

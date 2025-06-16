@@ -50,6 +50,20 @@ python -m pip install --upgrade pip
 echo.
 echo Installing requirements...
 python -m pip install -r requirements.txt
+if errorlevel 1 (
+    echo WARNING: Some packages may have failed to install.
+    echo Attempting to install critical packages individually...
+    echo.
+)
+
+echo Ensuring openpyxl is installed correctly...
+python -m pip install openpyxl==3.1.5 --force-reinstall
+if errorlevel 1 (
+    echo ERROR: Failed to install openpyxl!
+    echo This package is required for Excel file processing.
+    pause
+    exit /b 1
+)
 
 echo.
 echo Installing PyInstaller...
